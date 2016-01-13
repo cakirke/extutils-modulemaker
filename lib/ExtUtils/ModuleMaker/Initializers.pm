@@ -1,6 +1,6 @@
 package ExtUtils::ModuleMaker::Initializers;
 use strict;
-local $^W = 1;
+use warnings;
 use vars qw( $VERSION );
 $VERSION = 0.52;
 use ExtUtils::ModuleMaker::Licenses::Standard qw(

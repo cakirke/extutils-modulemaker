@@ -1,6 +1,6 @@
 package ExtUtils::ModuleMaker::Alt_block_new_method;
 use strict;
-local $^W = 1;
+use warnings;
 use File::Path;
 use Carp;
 

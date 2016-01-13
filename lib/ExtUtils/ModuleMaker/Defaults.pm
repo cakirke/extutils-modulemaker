@@ -1,5 +1,6 @@
 package ExtUtils::ModuleMaker::Defaults;
 use strict;
+use warnings;
 use vars qw( $VERSION );
 $VERSION = 0.52;
 
