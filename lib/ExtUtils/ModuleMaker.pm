@@ -227,6 +227,9 @@ sub complete_build {
 
     $self->print_file( 'MANIFEST', join( "\n", @{ $self->{MANIFEST} } ) );
     $self->make_selections_defaults() if $self->{SAVE_AS_DEFAULTS};
+
+    $self->initialize_repository() if $self->{REPOSITORY};
+    
     return 1;
 }
 

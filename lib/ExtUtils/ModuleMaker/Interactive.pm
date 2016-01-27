@@ -95,6 +95,7 @@ A - Author information
 L - License                     '##license##'
 D - Directives
 B - Build system                '##build##'
+R - Repository                  '##repository##'
 
 G - Generate module
 H - Generate module;
@@ -300,6 +301,12 @@ sub _prepare_author_defaults {
                 opt      => 'e',
                 select   => 'E',
             },
+        REPOSITORY => {
+                default  => $defaults_ref->{REPOSITORY},
+                string   => 'Repository  ',
+                opt      => 'R',
+                select   => 'R',
+            },
     );
     return { %author_defaults };
 }
@@ -359,7 +366,8 @@ sub Main_Menu {
         $string =~ s|##abstract##|$MOD->{ABSTRACT}|;
         $string =~ s|##license##|$MOD->{LICENSE}|;
         $string =~ s|##build##|$MOD->{BUILD_SYSTEM}|;
-    
+        $string =~ s|##repository##|$MOD->{REPOSITORY}|;
+
         my $response = Question_User( $string, 'menu' );
     
         return ( $destinations{'Main Menu'}{$response} )
@@ -395,6 +403,12 @@ sub Main_Menu {
             } else {
                 next MAIN_LOOP;
             }
+        }
+        elsif ( $response eq 'R') {
+            my $value = 
+              Question_User( 'Please enter repository type (git)',
+                'data' );
+            $MOD->{REPOSITORY} = $value;
         }
     } # END MAIN_LOOP
     return ('Main Menu');

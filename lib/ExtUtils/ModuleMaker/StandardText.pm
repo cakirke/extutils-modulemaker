@@ -121,6 +121,46 @@ sub print_file {
     close FILE;
 }
 
+=head3 C<initialize_repository()>
+
+  Usage     : $self->initialize_repository() within complete_build()
+  Purpose   : If REPOSITORY is known, initialize a local repository,
+              add all of the files we've created, and commit them.
+  Returns   : n/a
+  Argument  : n/a
+  Comment   :
+
+=cut
+
+sub initialize_repository {
+
+    my ( $self ) = @_;
+
+    my $vcs = lc( $self->{REPOSITORY} );
+    my $message = 'created by ExtUtils::ModuleMaker ' . $self->{eumm_version};
+
+    if (qx( which $vcs )) {
+        if ($vcs eq 'git') {
+            qx( cd $self->{Base_Dir} && $vcs init );
+            qx( cd $self->{Base_Dir} && $vcs add --all );
+            qx( cd $self->{Base_Dir} && $vcs commit -m "$message" );
+        }
+        elsif ($vcs eq 'hg') {
+            qx( cd $self->{Base_Dir} && $vcs init );
+            qx( cd $self->{Base_Dir} && $vcs add );
+            qx( cd $self->{Base_Dir} && $vcs commit -m "$message" );
+        }
+        else {
+            warn $vcs . ' not supported - no repository initialized';
+        }
+    }
+    else {
+        warn $vcs . ' not found - no repository initialized';
+    }
+    return;
+
+}
+
 =head2 Methods Called within C<complete_build()> as an Argument to C<print_file()>
 
 =head3 C<text_README()>

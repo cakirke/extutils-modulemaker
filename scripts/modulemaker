@@ -81,6 +81,7 @@ a series of menus looking something like this:
   L - License                     'perl'
   D - Directives
   B - Build system                'ExtUtils::MakeMaker'
+  R - Repository                  'git'
 
   G - Generate module
   H - Generate module;
@@ -287,6 +288,10 @@ Do not include a constructor (C<new()>) in the F<*.pm> file.
 =item * -r
 
 Set permissions.
+
+=item * -R
+
+Specify a version control system to initialize a local repository
 
 =item * -s
 

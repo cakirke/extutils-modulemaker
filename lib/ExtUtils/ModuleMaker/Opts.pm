@@ -9,7 +9,7 @@ $Getopt::Std::STANDARD_HELP_VERSION = 1;
 use Carp;
 
 my %opts;
-getopts( "bhqsCIPVcn:a:v:l:u:p:o:w:e:t:r:d:", \%opts );
+getopts( "bhqsCIPVcn:a:v:l:u:p:o:w:e:t:r:d:R:", \%opts );
 
 sub new {
     my $class = shift;
@@ -46,6 +46,7 @@ sub new {
         ( ( $opts{e} ) ? ( EMAIL                 => $opts{e} ) : () ),
         ( ( $opts{r} ) ? ( PERMISSIONS           => $opts{r} ) : () ),
         ( ( $opts{d} ) ? ( ALT_BUILD             => $opts{d} ) : () ),
+        ( ( $opts{R} ) ? ( REPOSITORY            => $opts{R} ) : () ),
         USAGE_MESSAGE => Usage(
             $self->{SCRIPT},
             $self->{PACKAGE},
@@ -87,6 +88,7 @@ Currently Supported Features
     -P   Omit the stub POD section
     -q   Flag to omit a constructor from module
     -r   Specify permissions
+    -R   Specify a version control system to initialize a local repository
     -s   Flag to save selections as new personal default values
     -u   Specify (in quotes) author's name
     -v   Specify a version number for this extension
